@@ -1,0 +1,136 @@
+/* General */
+body {
+  background-color: #111827;
+  color: #E5E7EB;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding-top: 80px; /* space for fixed navbar */
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  margin: 20px;
+  font-size: 0.9rem;
+  color: #9CA3AF;
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.page-header h1 {
+  margin-bottom: 5px;
+}
+
+.page-header p {
+  color: #D1D5DB;
+  font-size: 0.95rem;
+}
+
+/* Information Banner */
+.info-banner {
+  background-color: #374151;
+  color: #F9FAFB;
+  padding: 10px 20px;
+  margin: 0 auto 20px auto;
+  max-width: 600px;
+  border-left: 5px solid #3B82F6;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+/* Form Card */
+.form-card {
+  background-color: #1F2937;
+  max-width: 600px;
+  margin: 40px auto 40px auto; /* top margin + more space */
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: 1px solid #374151;
+  background-color: #111827;
+  color: #E5E7EB;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3B82F6;
+}
+
+.helper-text {
+  font-size: 0.8rem;
+  color: #9CA3AF;
+  margin-top: 2px;
+}
+
+.error {
+  font-size: 0.8rem;
+  color: #F87171;
+  height: 14px;
+  margin-top: 2px;
+}
+
+.form-note {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #9CA3AF;
+}
+
+/* Severity Indicator */
+.severity-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: 10px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+/* Submit Button */
+button[type="submit"] {
+  background-color: #3B82F6;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+}
+
+button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Success Message */
+.success-msg {
+  margin-top: 15px;
+  background-color: #16A34A;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}

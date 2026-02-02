@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report New Disaster Incident</title>
+  <link rel="stylesheet" href="add-disaster.css">
+</head>
+<body>
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb">
+    Dashboard → Disaster Management → Add Disaster
+  </nav>
+
+  <!-- Page Title -->
+  <header class="page-header">
+    <h1>Report New Disaster Incident</h1>
+    <p>Submit verified information for prompt emergency response.</p>
+  </header>
+
+  <!-- Information Banner -->
+  <div class="info-banner">
+    Only verified information should be reported. False reporting may lead to misallocation of emergency resources.
+  </div>
+
+  <!-- Form Card -->
+  <div class="form-card">
+    <form id="disasterForm">
+      <!-- Disaster ID & Timestamp -->
+      <div class="form-group">
+        <label for="disasterId">Disaster ID</label>
+        <input type="text" id="disasterId" readonly>
+      </div>
+      <div class="form-group">
+        <label for="reportTime">Reported At</label>
+        <input type="text" id="reportTime" readonly>
+      </div>
+
+      <!-- Disaster Type -->
+      <div class="form-group">
+        <label for="disasterType">Disaster Type *</label>
+        <select id="disasterType" required>
+          <option value="">-- Select Type --</option>
+          <option>Flood</option>
+          <option>Earthquake</option>
+          <option>Fire</option>
+          <option>Cyclone</option>
+          <option>Landslide</option>
+          <option>Other</option>
+        </select>
+        <input type="text" id="otherType" placeholder="Specify Disaster Type" style="display:none;">
+        <small class="error" id="disasterTypeError"></small>
+      </div>
+
+      <!-- Severity -->
+      <div class="form-group">
+        <label for="severity">Severity *</label>
+        <select id="severity" required>
+          <option value="">-- Select Severity --</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+        <span id="severityIndicator" class="severity-indicator"></span>
+        <small class="helper-text">
+          Low → Minor, localized impact | Medium → Multiple areas affected | High → Life-threatening emergency
+        </small>
+        <small class="error" id="severityError"></small>
+      </div>
+
+      <!-- Location -->
+      <div class="form-group">
+        <label for="location">Location *</label>
+        <input type="text" id="location" placeholder="City, District, State" required>
+        <small class="error" id="locationError"></small>
+      </div>
+
+      <!-- Date -->
+      <div class="form-group">
+        <label for="date">Date *</label>
+        <input type="date" id="date" required>
+        <small class="error" id="dateError"></small>
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description">Description *</label>
+        <textarea id="description" rows="4" required></textarea>
+        <small class="error" id="descriptionError"></small>
+      </div>
+
+      <!-- Reporting Authority -->
+      <div class="form-group">
+        <label for="authority">Reporting Authority (Optional)</label>
+        <select id="authority">
+          <option value="">-- Select Authority --</option>
+          <option>District Office</option>
+          <option>Police Department</option>
+          <option>Fire Department</option>
+          <option>Medical Authority</option>
+          <option>Control Room Operator</option>
+        </select>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" id="submitBtn">Submit</button>
+      <small class="form-note">All fields are mandatory.</small>
+    </form>
+
+    <!-- Inline Success Notification -->
+    <div id="successMsg" class="success-msg" style="display:none;">
+      ✅ Disaster reported successfully!
+    </div>
+  </div>
+
+  <script src="add-disaster.js"></script>
+</body>
+</html>

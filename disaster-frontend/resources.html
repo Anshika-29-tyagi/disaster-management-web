@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Resource Management</title>
+  <link rel="stylesheet" href="resources.css" />
+</head>
+<body>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    Dashboard → Resource Management
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Emergency Resource Status</h1>
+    <p>Live availability and allocation of disaster response resources</p>
+    <span class="timestamp">Last Updated: <strong id="lastUpdated"></strong></span>
+  </div>
+
+  <!-- Alert -->
+  <div class="alert">
+    ⚠️ Resources marked as <strong>Critical</strong> require immediate attention.
+  </div>
+
+  <!-- Table -->
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Resource</th>
+          <th>Priority</th>
+          <th>Available</th>
+          <th>In Use</th>
+          <th>Utilization</th>
+          <th>Status</th>
+          <th>Assigned To</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="resourceTable"></tbody>
+    </table>
+  </div>
+
+  <!-- Logs -->
+  <div class="card logs">
+    <h3>Recent Activity Logs</h3>
+    <ul id="logList"></ul>
+  </div>
+
+  <script src="resources.js"></script>
+</body>
+</html>
