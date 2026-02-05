@@ -5,6 +5,24 @@ body {
   color: #e5e7eb;
   padding-top: 80px; /* navbar space */
 }
+.navbar {
+  background: #1e3c72;
+  padding: 10px 20px;
+  display: flex;
+  gap: 15px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 15px;
+  padding: 6px 10px;
+  border-radius: 5px;
+}
+
+.navbar a:hover {
+  background: #2a5298;
+}
 
 .breadcrumb {
   margin: 0 40px;
