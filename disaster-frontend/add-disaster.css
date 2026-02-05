@@ -4,7 +4,7 @@ body {
   color: #E5E7EB;
   font-family: Arial, sans-serif;
   margin: 0;
-  padding-top: 80px; /* space for fixed navbar */
+  /* padding-top: 80px; space for fixed navbar */
 }
 .navbar {
   background: #1e3c72;
@@ -26,11 +26,11 @@ body {
 }
 
 /* Breadcrumb */
-.breadcrumb {
+/* .breadcrumb {
   margin: 20px;
   font-size: 0.9rem;
   color: #9CA3AF;
-}
+} */
 
 /* Page Header */
 .page-header {
