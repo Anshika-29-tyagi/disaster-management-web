@@ -3,8 +3,8 @@ body {
   font-family: Arial, sans-serif;
   background: #111827;
   color: #e5e7eb;
-  padding-top: 80px; /* navbar space */
-}
+  /* padding-top: 80px; /* navbar space */
+} 
 .navbar {
   background: #1e3c72;
   padding: 10px 20px;
