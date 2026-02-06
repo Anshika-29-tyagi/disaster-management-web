@@ -105,6 +105,9 @@
   background: #c92f3b;
   transform: translateY(-2px);
 }
+#loginAs{
+  color:white;
+}
 #loginRole{
   color:black;
 }
