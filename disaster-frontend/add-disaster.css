@@ -4,15 +4,33 @@ body {
   color: #E5E7EB;
   font-family: Arial, sans-serif;
   margin: 0;
-  padding-top: 80px; /* space for fixed navbar */
+  /* padding-top: 80px; space for fixed navbar */
+}
+.navbar {
+  background: #1e3c72;
+  padding: 10px 20px;
+  display: flex;
+  gap: 15px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 15px;
+  padding: 6px 10px;
+  border-radius: 5px;
+}
+
+.navbar a:hover {
+  background: #2a5298;
 }
 
 /* Breadcrumb */
-.breadcrumb {
+/* .breadcrumb {
   margin: 20px;
   font-size: 0.9rem;
   color: #9CA3AF;
-}
+} */
 
 /* Page Header */
 .page-header {
