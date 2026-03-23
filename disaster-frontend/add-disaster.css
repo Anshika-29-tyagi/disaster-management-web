@@ -6,11 +6,15 @@ body {
   margin: 0;
   /* padding-top: 80px; space for fixed navbar */
 }
-.navbar {
+    .navbar-nav .nav-link {
+  padding: 6px 10px !important;
+}
+
+    .navbar {
   background: #1e3c72;
-  padding: 10px 20px;
+  padding: 13px 13px;
   display: flex;
-  gap: 15px;
+  gap: 260px;
 }
 
 .navbar a {
@@ -24,7 +28,6 @@ body {
 .navbar a:hover {
   background: #2a5298;
 }
-
 /* Breadcrumb */
 /* .breadcrumb {
   margin: 20px;
