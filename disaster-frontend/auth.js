@@ -1,36 +1,51 @@
 /* ---------- LOGIN ---------- */
-function login() {
-  const user = document.getElementById("loginUser").value.trim();
+async function login() {
+  const email = document.getElementById("loginUser").value.trim();
   const pass = document.getElementById("loginPass").value.trim();
   const role = document.getElementById("loginRole").value;
   const error = document.getElementById("loginError");
 
   error.style.display = "none";
 
-  if (!user || !pass || !role) {
+  if (!email || !pass || !role) {
     error.innerText = "Please fill all the fields";
     error.style.display = "block";
     return;
   }
 
-  const savedUser = JSON.parse(localStorage.getItem("user"));
+  try {
+    const response = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: email,
+        password: pass
+      })
+    });
 
-  if (!savedUser) {
-    error.innerText = "No account found. Please sign up first";
-    error.style.display = "block";
-    return;
-  }
+    const data = await response.json();
 
-  if (user === savedUser.username && pass === savedUser.password) {
-    window.location.href = "dashboard.html";
-  } else {
-    error.innerText = "Wrong username or password";
+    if (response.ok) {
+      localStorage.setItem("token", data.token);
+
+      window.location.href = "dashboard.html";
+    } else {
+      error.innerText = data.message || "Login failed";
+      error.style.display = "block";
+    }
+
+  } catch (err) {
+    console.error(err);
+    error.innerText = "Server error";
     error.style.display = "block";
   }
 }
 
+
 /* ---------- SIGNUP ---------- */
-function signup() {
+async function signup() {
   const user = document.getElementById("signupUser").value.trim();
   const email = document.getElementById("signupEmail").value.trim();
   const pass = document.getElementById("signupPass").value.trim();
@@ -58,16 +73,32 @@ function signup() {
     return;
   }
 
-  // ✅ SAVE SIGNUP DATA
-  localStorage.setItem(
-    "user",
-    JSON.stringify({
-      username: user,
-      email: email,
-      password: pass
-    })
-  );
+  try {
+    const response = await fetch("http://localhost:5000/api/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: user,
+        email: email,
+        password: pass
+      })
+    });
 
-  // ✅ REDIRECT BACK TO LOGIN
-  window.location.href = "index.html";
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("Signup successful");
+      window.location.href = "index.html";
+    } else {
+      error.innerText = data.message || "Signup failed";
+      error.style.display = "block";
+    }
+
+  } catch (err) {
+    console.error(err);
+    error.innerText = "Server error";
+    error.style.display = "block";
+  }
 }
