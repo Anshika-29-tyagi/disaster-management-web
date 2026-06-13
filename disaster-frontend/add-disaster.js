@@ -47,9 +47,9 @@ severity.addEventListener('change', () => {
   else if(value === 'High') severityIndicator.style.backgroundColor = 'red';
   else severityIndicator.style.backgroundColor = 'transparent';
 });
-
+disasterForm.addEventListener('submit', async (e) => {
 // Form submission
-disasterForm.addEventListener('submit', (e) => {
+
   e.preventDefault();
 
   // Simple validation
@@ -95,7 +95,45 @@ disasterForm.addEventListener('submit', (e) => {
     timestamp: reportTimeInput.value
   };
 
-  disasters.push(disasterRecord);
+  try {
+
+  const response = await fetch(
+    "http://localhost:5000/api/disasters",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        disasterId: disasterRecord.id,
+        type: disasterRecord.type,
+        severity: disasterRecord.severity,
+        location: disasterRecord.location,
+        date: disasterRecord.date,
+        description: disasterRecord.description,
+        authority: disasterRecord.authority
+      })
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    alert(data.error || "Failed to save disaster");
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit";
+    return;
+  }
+
+} catch (error) {
+
+  console.error(error);
+  alert("Server Error");
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = "Submit";
+  return;
+}
 
   // Show success
   successMsg.style.display = 'block';

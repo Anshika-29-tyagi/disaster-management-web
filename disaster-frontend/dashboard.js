@@ -1,54 +1,140 @@
+let currentDisasters = [];
+
 console.log("Dashboard JS Loaded");
 
-const disasters = [
-  { id: "DM101", type: "Flood", severity: "High", location: "Delhi", status: "In Progress" },
-  { id: "DM102", type: "Fire", severity: "Medium", location: "Mumbai", status: "Reported" },
-  { id: "DM103", type: "Earthquake", severity: "Low", location: "Chennai", status: "Resolved" }
-];
+async function loadDashboard() {
 
-// 🔢 CARDS
-document.getElementById("totalDisasters").innerText = disasters.length;
-document.getElementById("activeDisasters").innerText =
-  disasters.filter(d => d.status !== "Resolved").length;
-document.getElementById("resolvedDisasters").innerText =
-  disasters.filter(d => d.status === "Resolved").length;
-document.getElementById("resourcesUsed").innerText = 14;
+  try {
 
-// 📋 TABLE
-const tableBody = document.getElementById("disasterTableBody");
+    const response = await fetch(
+      "http://localhost:5000/api/dashboard"
+    );
 
-disasters.forEach(d => {
-  tableBody.innerHTML += `
-    <tr>
-      <td>${d.id}</td>
-      <td>${d.type}</td>
-      <td>
-        <span class="badge ${
-          d.severity === "High" ? "bg-danger" :
-          d.severity === "Medium" ? "bg-warning" : "bg-success"
-        }">${d.severity}</span>
-      </td>
-      <td>${d.location}</td>
-      <td>
-        <span class="badge ${
-          d.status === "Resolved" ? "bg-success" :
-          d.status === "In Progress" ? "bg-warning" : "bg-primary"
-        }">${d.status}</span>
-      </td>
-      <td>
-        <button class="btn btn-sm btn-outline-primary me-2"
-          onclick="viewDetails('${d.id}')">
-          <i class="bi bi-eye"></i>
-        </button>
-        <button class="btn btn-sm btn-outline-success"
-          onclick="updateStatus('${d.id}')">
-          <i class="bi bi-arrow-repeat"></i>
-        </button>
-      </td>
-    </tr>
-  `;
-});
+    const data = await response.json();
+
+    currentDisasters = data.disasters;
+
+    document.getElementById("totalDisasters").innerText =
+      data.total;
+
+    document.getElementById("activeDisasters").innerText =
+      data.active;
+
+    document.getElementById("resolvedDisasters").innerText =
+      data.resolved;
+
+    document.getElementById("resourcesUsed").innerText =
+      data.resourcesUsed;
+
+    const tableBody =
+      document.getElementById("disasterTableBody");
+
+    tableBody.innerHTML = "";
+
+    data.disasters.forEach(d => {
+
+      tableBody.innerHTML += `
+        <tr>
+          <td>${d.disasterId}</td>
+          <td>${d.type}</td>
+          <td>${d.severity}</td>
+          <td>${d.location}</td>
+          <td>${d.status}</td>
+          <td>
+
+            <button
+              class="btn btn-sm btn-outline-primary me-2"
+              onclick="viewDetails('${d.disasterId}')">
+              View
+            </button>
+
+            <button
+              class="btn btn-sm btn-outline-success"
+              onclick="updateStatus('${d._id}')">
+              Update Status
+            </button>
+
+          </td>
+        </tr>
+      `;
+
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+  }
+
+}
+
+loadDashboard();
+
+async function updateStatus(id) {
+
+  try {
+
+    const response = await fetch(
+      `http://localhost:5000/api/disasters/${id}`,
+      {
+        method: "PUT"
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+
+      alert("Status Updated Successfully");
+
+      loadDashboard();
+
+    } else {
+
+      alert(data.message || "Failed to update status");
+
+    }
+
+  } catch (err) {
+
+    console.error(err);
+
+    alert("Server Error");
+
+  }
+
+}
 
 function viewDetails(id) {
-  alert("Viewing details for " + id);
+
+  const disaster = currentDisasters.find(
+    d => d.disasterId === id
+  );
+
+  if (!disaster) {
+
+    alert("Disaster not found");
+
+    return;
+
+  }
+
+  alert(
+`Disaster ID: ${disaster.disasterId}
+
+Type: ${disaster.type}
+
+Severity: ${disaster.severity}
+
+Location: ${disaster.location}
+
+Status: ${disaster.status}
+
+Date: ${disaster.date || "N/A"}
+
+Authority: ${disaster.authority || "N/A"}
+
+Description: ${disaster.description || "N/A"}`
+  );
+
 }
